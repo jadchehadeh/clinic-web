@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Register-Doctor{%endblock%}
+
+{% block content %}
+<section id="content">
+
+    <div class="page page-forms-validate">
+
+        <div class="pageheader">
+
+            <h2>Welcome to the Clinic <span>Register now Doctor</span></h2>
+
+            <div class="page-bar">
+
+                <ul class="page-breadcrumb">
+                    <li>
+                        <a href="{% url 'doctor-login' %}"><i class="fa fa-sign-out"></i> Login In</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'patient-signup' %}">I'am A Patient</a>
+                    </li>
+                    <li>
+                        {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                   <div class="alert-danger">{{ message }}</div>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+                </ul>
+                
+            </div>
+
+        </div>
+
+
+        <!-- row -->
+        <div class="row">
+
+            <!-- col -->
+            <div class="col-md-6">
+
+                <!-- tile -->
+                <section class="tile">
+
+                    <!-- tile header -->
+                    <div class="tile-header dvd dvd-btm">
+                        <h1 class="custom-font"><strong>Register</strong> Now</h1>
+                        <ul class="controls m-4" >
+                            <li class="dropdown">
+
+                                <a role="button" tabindex="0" class="dropdown-toggle settings" data-toggle="dropdown">
+                                    <i class="fa fa-cog"></i>
+                                    <i class="fa fa-spinner fa-spin"></i>
+                                </a>
+
+                                <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp">
+                                    <li>
+                                        <a role="button" tabindex="0" class="tile-toggle">
+                                            <span class="minimize"><i class="fa fa-angle-down"></i>&nbsp;&nbsp;&nbsp;Minimize</span>
+                                            <span class="expand"><i class="fa fa-angle-up"></i>&nbsp;&nbsp;&nbsp;Expand</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a role="button" tabindex="0" class="tile-refresh">
+                                            <i class="fa fa-refresh"></i> Refresh
+                                        </a>
+                                    </li>
+                                    <li>
+                                       
+                                    </li>
+                                </ul>
+
+                            </li>
+                           
+                        </ul>
+                    </div>
+                    <!-- /tile header -->
+
+                    <!-- tile body -->
+                    <div class="tile-body">
+
+                        <p class="text-muted">Put all your informations -{{msg}}</p>
+                        
+
+                        <form name="form1" role="form" id="form1" method="POST" >
+                            {% csrf_token %}
+
+                            <div class="form-group">
+                                <label for="username">Username: </label>
+                                <input type="text" name="username" id="username" class="form-control"
+                                       data-parsley-trigger="change"
+                                       data-parsley-range="[4, 20]"
+                                       required>
+                                       
+                            </div>
+                            <div class="form-group">
+                                <label for="username">First Name: </label>
+                                <input type="text" name="firstname" id="firstname" class="form-control"
+                                       data-parsley-trigger="change"
+                                       data-parsley-range="[4, 20]"
+                                       required>
+                                       
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="username">Last Name: </label>
+                                <input type="text" name="lastname" id="lastname" class="form-control"
+                                       data-parsley-trigger="change"
+                                       data-parsley-range="[4, 20]"
+                                       required>
+                                       
+                            </div>
+                            <div class="form-group">
+                                <label for="Specialization">Specialization:</label>
+                                <select name="Specialization" id="Specialization" class="form-control">
+                                    {% for specialization in specialization_list %}
+                                        <option value="{{ specialization }}">{{ specialization }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            
+                            
+                            
+
+                            <div class="form-group">
+                                <label for="email">Email: </label>
+                                <input type="email" name="email" id="email" class="form-control"
+                                       data-parsley-trigger="change"
+                                       required>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="form-group col-md-6">
+                                    <label for="password">Password: </label>
+                                    <input type="password" name="password" id="password" class="form-control"
+                                           data-parsley-trigger="change"
+                                           data-parsley-range="[4, 20]"
+                                           required>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="passwordConfirm">Password confirmation: </label>
+                                    <input type="password" name="passwordConfirm" id="passwordConfirm" class="form-control"
+                                           data-parsley-trigger="change"
+                                           data-parsley-range="[4, 20]"
+                                           data-parsley-equalto="#password"
+                                           required>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="experience">experience: </label>
+                                <input type="number" name="experience" id="experience" class="form-control"
+                                       data-parsley-trigger="change"
+                                       required max="20" min="1">
+                                       
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone: </label>
+                                <input type="text" name="phone" id="phone" class="form-control" placeholder="(XXX) XXXX XXX"
+                                       data-parsley-trigger="change"
+                                       pattern="^[\d\+\-\.\(\)\/\s]*$"
+                                       required>
+                            </div>
+
+                            <div class="checkbox">
+                                <label class="checkbox checkbox-custom">
+                                    <input type="checkbox" name="agree" id="agree"
+                                           data-parsley-trigger="change"
+                                           required>
+                                    <i></i> I agree to the <a href class="text-info">Terms of Service</a>
+                                </label>
+                            </div>
+                            <div class="tile-footer text-right bg-tr-black lter dvd dvd-top">
+                                <!-- SUBMIT BUTTON -->
+                                <button type="submit" class="btn btn-success" id="form1Submit" disabled>Submit</button>
+                            </div>
+                        </form>
+
+                    </div>
+                    <!-- /tile body -->
+
+                    <!-- tile footer -->
+                    
+                    <!-- /tile footer -->
+
+                </section>
+                <script>
+                    $(window).load(function(){
+                        $('#form1').parsley().subscribe('parsley:field:validate', function () {
+                            if ($('#form1').parsley().isValid()) {
+                                $('#form1Submit').prop('disabled', false);
+                            } else {
+                                $('#form1Submit').prop('disabled', true);
+                            }
+                        });
+        
+                        $('#form1Submit').on('click', function(){
+                            $('#form1').submit();
+                        });
+        
+                        $('#form2Submit').on('click', function(){
+                            $('#form2').submit();
+                        });
+        
+                        $('#form3Submit').on('click', function(){
+                            $('#form3').submit();
+                        });
+        
+                        $('#form4Submit').on('click', function(){
+                            $('#form4').submit();
+                        });
+                    });
+                </script>
+{%endblock%}
+{% block scripts %}{% endblock %}
+
+    
+
+
+

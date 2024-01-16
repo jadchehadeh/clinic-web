@@ -1,0 +1,91 @@
+{% extends 'authbase.html' %}
+{% block title %}{{doctor.user.username}}-profile{% endblock %}
+{% block username %}{{doctor.user.first_name}} {{doctor.user.last_name}}{% endblock %}
+{% block menuusername %}{{doctor.user.first_name}} {{ doctor.user.last_name }}{% endblock %}
+{% block menutitle %}Edit Your Profile{% endblock %}
+{% block menu %}{% endblock %}
+{% block content %}
+<div class="page page-forms-common">
+
+    <div class="pageheader">
+
+        <h2>Edit Your Profile <span>{{doctor.user.first_name}} {{doctor.user.last_name}}</span></h2>
+
+        <div class="page-bar">
+
+            <ul class="page-breadcrumb">
+                <li>
+                    
+                    <a href="{% url 'doctor-dashboard' %}"><i class="fa fa-home"></i> Minovate</a>
+                </li>
+                <li>{% if request.GET.message %}
+ 
+                    <div class="alert-success"><b>{{ request.GET.message }}</b></div>
+                    {% endif %}</li>
+                
+            </ul>
+            
+        </div>
+
+<form name="form1" role="form" id="form1" method="POST" action="{% url 'update-profile' %}">
+    {% csrf_token %}
+
+   
+    <div class="form-group">
+        <label for="username">First Name: </label>
+        <input value="{{doctor.user.first_name}}" type="text" name="firstname" id="firstname" class="form-control"
+               data-parsley-trigger="change"
+               data-parsley-range="[4, 20]"
+               required>
+               
+    </div>
+    
+    <div class="form-group">
+        <label for="username">Last Name: </label>
+        <input value="{{doctor.user.last_name}}" type="text" name="lastname" id="lastname" class="form-control"
+               data-parsley-trigger="change"
+               data-parsley-range="[4, 20]"
+               required>
+               
+    </div>
+    <div class="form-group">
+        <label for="Specialization">Specialization:</label>
+        <select name="Specialization" id="Specialization" class="form-control">
+            <!-- This Loop Checks if the specialization of the doctor =  to specific specialization in the list so it is the doctor specialization so it is selected -->
+            {% for specialization in specialization %}
+                {% if specialization == doctor.specialization %}
+                  <option value="{{ specialization }}" selected>{{ specialization }}</option>
+                {% endif %}
+               
+                <option value="{{ specialization }}" >{{ specialization }}</option>
+                
+               
+            {% endfor %}
+        </select>
+    </div>
+    
+   
+    <div class="form-group">
+        <label for="experience">experience: </label>
+        <input value="{{doctor.experience}}"type="number" name="experience" id="experience" class="form-control"
+               data-parsley-trigger="change"
+               required max="20" min="1">
+               
+    </div>
+    <div class="form-group">
+        <label for="phone">Phone: </label>
+        <input value="{{doctor.number}}"type="text" name="phone" id="phone" class="form-control" placeholder="(XXX) XXXX XXX"
+               data-parsley-trigger="change"
+               pattern="^[\d\+\-\.\(\)\/\s]*$"
+               required>
+    </div>
+
+   
+    <div class="tile-footer text-right bg-tr-black lter dvd dvd-top">
+        <!-- SUBMIT BUTTON -->
+        <input type="hidden" name="user_id" value="{{doctor.user.id}}">  <!-- This input type = hidden sends the user id and the doctor id-->
+        <input type="hidden" name="doctor_id" value="{{doctor.id}}"><!-- This input type = hidden sends the user id and the doctor id-->
+        <button type="submit" class="btn btn-success" id="form1Submit" >Update</button>
+    </div>
+</form>
+{% endblock %}

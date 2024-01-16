@@ -1,0 +1,5 @@
+{% extends 'authbase.html' %}
+{% load static %}
+{% block title %}Dashboard-{{doctor.user.first_name}} {{doctor.user.last_name}}{% endblock %}
+{% block username %}{{doctor.user.first_name}} {{doctor.user.last_name}}{%endblock%}
+{% block content %}{% endblock %}

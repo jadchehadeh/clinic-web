@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div id="wrap" class="animsition">
+
+
+    
+
+    <div class="page page-core page-login">
+
+        <div class="text-center"><h3 class="text-light text-white"><span class="text-lightred">Cli</span>nic</h3></div>
+
+        <div class="container w-420 p-15 bg-white mt-40 text-center">
+
+
+            <h2 class="text-light text-greensea">Log In</h2>
+            {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                   <div class="alert-danger">{{ message }}</div>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+
+            <!-- <form name="form" class="form-validation mt-20" method="POST" action="{% url 'doctor-login' %}"novalidate="">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="email" class="form-control underline-input" placeholder="Email">
+                </div>
+
+                <div class="form-group">
+                    <input type="password" placeholder="Password" class="form-control underline-input">
+                </div>
+
+                <div class="form-group text-left mt-20">
+                    <input type="submit" value="Login" class="btn btn-greensea b-0 br-2 mr-5" >
+                    
+                    <a href="forgotpass.html" class="pull-right mt-10">Forgot Password?</a>
+                </div>
+
+            </form> -->
+            <form name="form1" role="form" id="form1" method="POST" >
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="username">Username: </label>
+                    <input type="text" name="username" id="username" class="form-control"
+                           data-parsley-trigger="change"
+                           data-parsley-range="[4, 20]"
+                           required>
+                           
+                </div>
+                <div class="form-group">
+                    <label for="password">Password: </label>
+                    <input type="password" name="password" id="password" class="form-control"
+                           data-parsley-trigger="change"
+                           data-parsley-range="[4, 20]"
+                           required>
+                </div>
+
+                <button class='btn btn-success' type="submit">Login</button>
+            </form>
+
+
+            <hr class="b-3x">
+
+            <div class="social-login text-left">
+
+                <ul class="pull-right list-unstyled list-inline">
+                    <li class="p-0">
+                        <a class="btn btn-sm btn-primary b-0 btn-rounded-20" href="javascript:;"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    
+                    <li class="p-0">
+                        <a class="btn btn-sm btn-lightred b-0 btn-rounded-20" href="javascript:;"><i class="fa fa-google-plus"></i></a>
+                    </li>
+                   
+                </ul>
+
+                <h5>Or login with</h5>
+
+            </div>
+
+            <div class="bg-slategray lt wrap-reset mt-40">
+                <p class="m-0">
+                    <a href="{% url 'patient-signup' %}" class="text-uppercase">Create an account</a>
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+{% endblock %}

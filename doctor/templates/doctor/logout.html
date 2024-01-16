@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    LoggedOut
+{% endblock %}
+{% block content %}
+<div class="container bg-light">
+<h2 class="pl-15" style="margin:80px">You have been logged out</h2>
+		<div class="border-top" style="margin:100px;">
+			
+			<small class="text-muted text-lg">
+					Login Again?
+					
+					<a class="btn btn-primary ml-2" href="{% url 'doctor-login' %}">Login</a>
+					
+					<a class="btn btn-success ml-2" href="{% url 'doctor-login' %}">Register</a>
+
+			</small>
+
+
+		</div>
+	</div>
+{% endblock %}
